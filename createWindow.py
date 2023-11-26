@@ -1,41 +1,78 @@
-import tkinter 
+import tkinter as tk
 import customtkinter
+import statsFunctions
 
 def clear_window():
     # Destroy all widgets in the window
     for widget in window.winfo_children():
         widget.destroy()
 
-def on_button_click(button_text):
+def stats_button_click():
+      make_stats_window()
 
-      if button_text == 'Statistics':
-            make_stats_window()
-            
-      if button_text == 'Probability':
-            make_prob_window() 
+def prob_button_click():
+      make_prob_window()
 
-      if button_text == 'Back':
-            clear_window()
-            main_window()
+def back_button_click():
+      clear_window()
+      main_window()
 
 def make_stats_window():
-      clear_window()
+      standard_window('Statistics')
 
-      title = customtkinter.CTkLabel(window, text='Statistics')
-      title.pack(padx = 10, pady = 10)
+      button = customtkinter.CTkButton(window, text="Mean", command=mean_button_click)
+      button.pack(pady=10)
 
-      button = customtkinter.CTkButton(window, text="Back",  command=lambda: on_button_click("Back"))
-      button.pack(pady = 10)
+      button = customtkinter.CTkButton(window, text="Variance", command=variance_button_click)
+      button.pack(pady=10)
 
 def make_prob_window():
-      #clear previous window
+      standard_window('Probability')
+
+def mean_button_click():
+
+      def place_button(var, Button):
+            if len(var.get()):
+                  Button.pack()
+            else:
+                  Button.pack_forget()
+      def getMean():
+            nums = entry_text.get().split(',')
+            for i,j in enumerate(nums):
+                  nums[i] = int(j)
+
+            myMean = statsFunctions.Mean(nums)
+            print(f'Sample: {nums} \n \nAverage: {myMean}')
+           
+      
+      
+      standard_window('Mean')  
+
+      entry_text = tk.StringVar()
+
+      entry = customtkinter.CTkEntry(window, textvariable=entry_text, width=500)
+      entry.pack(pady=10)
+
+      label = customtkinter.CTkLabel(window, text='Enter numbers seperated by commas.')
+      label.pack(pady=10)
+
+      button = customtkinter.CTkButton(window, text="Calculate", command=getMean)
+      
+      entry_text.trace_add('write',lambda *args: place_button(entry_text, button))
+
+
+
+def variance_button_click():
+      standard_window('Variance')
+
+def standard_window(title):
       clear_window()
 
-      title = customtkinter.CTkLabel(window, text='Probability')
-      title.pack(padx = 10, pady = 10)
+      title_of_widow = customtkinter.CTkLabel(window, text=f'{title}')
+      title_of_widow.pack(padx=10, pady=10)
 
-      button = customtkinter.CTkButton(window, text="Back",  command=lambda: on_button_click("Back"))
-      button.pack(pady = 10)
+      button = customtkinter.CTkButton(window, text="Back",  command=back_button_click)
+      button.place(x=10, y=10)
 
 def main_window():
       # Adding UI Elements
@@ -44,10 +81,10 @@ def main_window():
 
 
       # Adding Buttons
-      button = customtkinter.CTkButton(window, text="Statistics",  command=lambda: on_button_click("Statistics"))
+      button = customtkinter.CTkButton(window, text="Statistics",  command=stats_button_click)
       button.pack(pady = 10)
 
-      button = customtkinter.CTkButton(window, text="Probability",  command=lambda: on_button_click("Probability"))
+      button = customtkinter.CTkButton(window, text="Probability",  command=prob_button_click)
       button.pack(pady = 10)
 
       
