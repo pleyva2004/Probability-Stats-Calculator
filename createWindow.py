@@ -2,22 +2,44 @@ import tkinter as tk
 import customtkinter
 import statsFunctions
 
+global history 
+history = []
+
 def clear_window():
     # Destroy all widgets in the window
     for widget in window.winfo_children():
         widget.destroy()
 
 def stats_button_click():
+      
       make_stats_window()
 
 def prob_button_click():
+      
       make_prob_window()
 
 def back_button_click():
-      clear_window()
-      main_window()
 
+      clear_window()
+
+      global history
+      temp = history[-2]
+      print(temp)
+      history = history[:-2]
+      print(history)
+
+      if temp == 'Home':
+            main_window()
+      elif temp == 'Statistics':
+            make_stats_window()
+      elif temp == 'Probability':
+            make_prob_window()
+          
 def make_stats_window():
+
+      history.append('Statistics')
+      print(history)
+
       standard_window('Statistics')
 
       button = customtkinter.CTkButton(window, text="Mean", command=mean_button_click)
@@ -27,9 +49,16 @@ def make_stats_window():
       button.pack(pady=10)
 
 def make_prob_window():
+
+      history.append('Probability')
+      print(history)
+
       standard_window('Probability')
 
 def mean_button_click():
+
+      history.append('Mean')
+      print(history)
 
       def place_button(var, Button):
             if len(var.get()):
@@ -60,9 +89,10 @@ def mean_button_click():
       
       entry_text.trace_add('write',lambda *args: place_button(entry_text, button))
 
-
-
 def variance_button_click():
+
+      history.append('Variance')
+      print(history)
       standard_window('Variance')
 
 def standard_window(title):
@@ -75,10 +105,14 @@ def standard_window(title):
       button.place(x=10, y=10)
 
 def main_window():
+
+      history.append('Home')
+      print(history)
+
+
       # Adding UI Elements
       title = customtkinter.CTkLabel(window, text='Home')
       title.pack(padx = 10, pady = 10)
-
 
       # Adding Buttons
       button = customtkinter.CTkButton(window, text="Statistics",  command=stats_button_click)
