@@ -2,7 +2,7 @@ import tkinter as tk
 import customtkinter
 import statsFunctions
 
-global history 
+#global history 
 history = []
 
 def clear_window():
@@ -25,7 +25,7 @@ def back_button_click():
       global history
       temp = history[-2]
       print(temp)
-      history = history[:-2]
+      history = history[:-2] # writing history -> becomes local variable
       print(history)
 
       if temp == 'Home':
@@ -57,7 +57,7 @@ def make_prob_window():
 
 def mean_button_click():
 
-      history.append('Mean')
+      history.append('Mean') # reading history by calling method 'append'
       print(history)
 
       def place_button(var, Button):
@@ -93,6 +93,7 @@ def variance_button_click():
 
       history.append('Variance')
       print(history)
+
       standard_window('Variance')
 
 def standard_window(title):
