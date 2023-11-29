@@ -39,7 +39,7 @@ def mean_button_click():
       def getMean():
             nums = entry_text.get().split(',')
             for i,j in enumerate(nums):
-                  nums[i] = int(j)
+                  nums[i] = float(j)
 
             myMean = statsFunctions.Mean(nums)
             print(f'Sample: {nums} \n \nAverage: {myMean}')
