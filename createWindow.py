@@ -108,6 +108,38 @@ def stanDev_button_click():
       
       entry_text.trace_add('write',lambda *args: place_button(entry_text, button))
 
+def stem_leaf_button_click():
+      history.append('Stem and Leaf Plot')
+      print(history)
+
+      standard_window('Stem and Leaf Plot')
+
+      def place_button(var, Button):
+            if len(var.get()):
+                  Button.pack()
+            else:
+                  Button.pack_forget()
+      def plot():
+            nums = entry_text.get().split(',')
+            for i,j in enumerate(nums):
+                  nums[i] = int(j)
+
+            myStem_Leaf = statsFunctions.stem_leaf_plot(nums)
+            #print(f'Sample: {nums} \n \nStandard Deviation: {myDeviation}')
+           
+
+      entry_text = tk.StringVar()
+
+      entry = customtkinter.CTkEntry(window, textvariable=entry_text, width=500)
+      entry.pack(pady=10)
+
+      label = customtkinter.CTkLabel(window, text='Enter numbers seperated by commas.')
+      label.pack(pady=10)
+
+      button = customtkinter.CTkButton(window, text="Plot", command=plot)
+      
+      entry_text.trace_add('write',lambda *args: place_button(entry_text, button))
+
 def prob_button_click():
       
       make_prob_window()
@@ -148,6 +180,9 @@ def make_stats_window():
       button.pack(pady=10)
       
       button = customtkinter.CTkButton(window, text="Standard Deviation", command=stanDev_button_click)
+      button.pack(pady=10)
+
+      button = customtkinter.CTkButton(window, text="Stem and Leaf Plot", command=stem_leaf_button_click)
       button.pack(pady=10)
 
 def make_prob_window():

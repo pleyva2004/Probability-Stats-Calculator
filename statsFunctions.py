@@ -44,42 +44,85 @@ def population_Standard_Dev(nums):
 #      return (max(nums)-min(nums))
 
 
-def stem_leaf_plot():
+def stem_leaf_plot(nums):
       branches = []
-      nums = [6,5,3,4,12,34,23,46,56,77,65,67]
       n = len(nums)
       for number in nums:
             if int(number/10) == 0:
-                
-                  if not len(branches):
-                        branches.append(branch(0,number))
-                        
-                  else:
-                  #search
-                        for b in branches:
-                              if b.getStem() == 0:
-                                   
-                                    b.append(number)
-                                   # b.sort()
-                                   
-
-            if int(number/10) < 10 and int(number/10) != 0:
-                  
                   found = False
-                  n = len(branches)
-                  for i in range(len(branches)):
-                        if branches[i].getStem() == int(number/10):
-                              branches[i].append(number%10)
-                             # branches[i].sort()
+            
+                  for b in branches:
+                        if b[0] == 0:
+                        #if there is a stem that = 0 
+                             
+                             #then add 1s place digit
+                              b[1].append(number)
+                              b[1].sort()
+                              found = True
+                
+                  if not found:
+                  #if there is no stem that = 0 
+
+                        #then make a new branch with stem = 0 and 1s digit and add to list
+                        newBranch = (0,[number])
+                        branches.append(newBranch) 
+                        
+                                   
+            if int(number/10) < 10 and int(number/10) != 0:
+                  found = False
+
+     
+                  
+                  for b in branches:
+                        if b[0] == int(number/10):
+                        #if there is a stem = the 10s place digit 
+
+                              #then add the 1s place digit     
+                              b[1].append(number%10)
+                              b[1].sort()
                               found = True
                   
                   if not found:
-                        newBranch = branch(int(number/10),number%10)
-                        branches.append(newBranch)
-                        #print(branches[-1].toString())
+                  #if there is no stem that = the 10s place digit 
 
+                        #then make a new branch with that stem and 1s place digit & + to list
+                        newBranch = (int(number/10),[number%10])
+                        branches.append(newBranch)
+     
+
+            if int(number/10) >= 10 and int(number/100) != 0 :
+                  found = False
+
+                  for b in branches:
+                        if b[0] == int(number/10):
+                        #if there is a stem = the 10s place digit 
+
+                              #then add the 1s place digit     
+                              b[1].append(number%10)
+                              b[1].sort()
+                              found = True
+                  
+                  if not found:
+                  #if there is no stem that = the 10s place digit 
+
+                        #then make a new branch with that stem and 1s place digit & + to list
+                        newBranch = (int(number/10),[number%10])
+                        branches.append(newBranch)
+      
+      branches.sort()
+      start = "stem          Leafs"
+      line  = "-------------------"
+      stringBranches = [start,line]
       for b in branches:
-            print(b.toString())             
+            if b[0] < 10:     
+                  string = "" + str(b[0]) + "       :      " + str(b[1]) + "     " # add frequency --- str(len(b[1]))
+                  stringBranches.append(string)
+            elif b[0] >= 10 and b[0] < 100:
+                  string = "" + str(b[0]) + "      :      " + str(b[1]) + "     " # add frequency --- str(len(b[1]))
+                  stringBranches.append(string)
+      
+      for strB in stringBranches:
+            print(strB)
                         
                   
 
@@ -112,9 +155,7 @@ class branch:
       #def sort(self):
             self.leafs.sort()
 
-         
-stem_leaf_plot()
-
+  
 
 
 
