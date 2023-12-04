@@ -110,9 +110,8 @@ def stem_leaf_plot(nums):
                         branches.append(newBranch)
       
       branches.sort()
-      start = "stem          Leafs"
-      line  = "-------------------"
-      stringBranches = [start,line]
+      start = "Stem                  Leafs"
+      stringBranches = [start,]
       for b in branches:
             if b[0] < 10:     
                   string = "" + str(b[0]) + "       :      " + str(b[1]) + "     " # add frequency --- str(len(b[1]))
@@ -121,9 +120,12 @@ def stem_leaf_plot(nums):
                   string = "" + str(b[0]) + "      :      " + str(b[1]) + "     " # add frequency --- str(len(b[1]))
                   stringBranches.append(string)
       
-      for strB in stringBranches:
-            print(strB)
-                        
+      #for strB in stringBranches:
+      #      print(strB)
+
+      return stringBranches
+
+
                   
 
 

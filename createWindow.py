@@ -125,6 +125,16 @@ def stem_leaf_button_click():
                   nums[i] = int(j)
 
             myStem_Leaf = statsFunctions.stem_leaf_plot(nums)
+
+            clear_window()
+            standard_window('Stem and Leaf Plot')
+
+            for strB in myStem_Leaf:
+                  label = customtkinter.CTkLabel(window, text=strB)
+                  label.pack()
+
+
+
             #print(f'Sample: {nums} \n \nStandard Deviation: {myDeviation}')
            
 
@@ -139,6 +149,10 @@ def stem_leaf_button_click():
       button = customtkinter.CTkButton(window, text="Plot", command=plot)
       
       entry_text.trace_add('write',lambda *args: place_button(entry_text, button))
+
+
+
+
 
 def prob_button_click():
       
