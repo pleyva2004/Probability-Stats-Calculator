@@ -12,8 +12,6 @@ def stats_button_click():
 def mean_button_click():
 
       history.append('Mean') 
-      print(history)
-
       standard_window('Mean')  
 
       def place_button(var, Button):
@@ -27,6 +25,8 @@ def mean_button_click():
                   nums[i] = float(j)
 
             myMean = statsFunctions.Mean(nums)
+
+
             print(f'Sample: {nums} \n \nAverage: {myMean}')
            
 
@@ -45,8 +45,6 @@ def mean_button_click():
 def variance_button_click():
 
       history.append('Variance')
-      print(history)
-
       standard_window('Variance')
 
       def place_button(var, Button):
@@ -75,11 +73,40 @@ def variance_button_click():
       
       entry_text.trace_add('write',lambda *args: place_button(entry_text, button))
 
+def range_button_click():
+
+      history.append('Range') 
+      standard_window('Range')  
+
+      def place_button(var, Button):
+            if len(var.get()):
+                  Button.pack()
+            else:
+                  Button.pack_forget()
+      def getRange():
+            nums = entry_text.get().split(',')
+            for i,j in enumerate(nums):
+                  nums[i] = float(j)
+
+            myRange = statsFunctions.Range(nums)
+            print(f'Sample: {nums} \n \nRange: {myRange}')
+           
+
+      entry_text = tk.StringVar()
+
+      entry = customtkinter.CTkEntry(window, textvariable=entry_text, width=500)
+      entry.pack(pady=10)
+
+      label = customtkinter.CTkLabel(window, text='Enter numbers seperated by commas.')
+      label.pack(pady=10)
+
+      button = customtkinter.CTkButton(window, text="Calculate", command=getRange)
+      
+      entry_text.trace_add('write',lambda *args: place_button(entry_text, button))
+
 def stanDev_button_click():
 
       history.append('Standard Deviation')
-      print(history)
-
       standard_window('Standard Deviation')
 
       def place_button(var, Button):
@@ -110,8 +137,6 @@ def stanDev_button_click():
 
 def stem_leaf_button_click():
       history.append('Stem and Leaf Plot')
-      print(history)
-
       standard_window('Stem and Leaf Plot')
 
       def place_button(var, Button):
@@ -150,10 +175,6 @@ def stem_leaf_button_click():
       
       entry_text.trace_add('write',lambda *args: place_button(entry_text, button))
 
-
-
-
-
 def prob_button_click():
       
       make_prob_window()
@@ -164,9 +185,7 @@ def back_button_click():
 
       global history
       temp = history[-2]
-      print(temp)
       history = history[:-2] # writing history -> becomes local variable
-      print(history)
 
       if temp == 'Home':
             main_window()
@@ -174,6 +193,7 @@ def back_button_click():
             make_stats_window()
       elif temp == 'Probability':
             make_prob_window()
+      
           
 def clear_window():
     # Destroy all widgets in the window
@@ -183,8 +203,6 @@ def clear_window():
 def make_stats_window():
 
       history.append('Statistics') # reading history by calling method 'append'
-      print(history)
- 
       standard_window('Statistics')
 
       button = customtkinter.CTkButton(window, text="Mean", command=mean_button_click)
@@ -192,6 +210,10 @@ def make_stats_window():
 
       button = customtkinter.CTkButton(window, text="Variance", command=variance_button_click)
       button.pack(pady=10)
+
+      button = customtkinter.CTkButton(window, text="Range", command=range_button_click)
+      button.pack(pady=10)
+      
       
       button = customtkinter.CTkButton(window, text="Standard Deviation", command=stanDev_button_click)
       button.pack(pady=10)
@@ -202,8 +224,6 @@ def make_stats_window():
 def make_prob_window():
 
       history.append('Probability')
-      print(history)
-
       standard_window('Probability')
 
 def standard_window(title):
@@ -218,8 +238,6 @@ def standard_window(title):
 def main_window():
 
       history.append('Home')
-      print(history)
-
 
       # Adding UI Elements
       title = customtkinter.CTkLabel(window, text='Home')

@@ -20,6 +20,9 @@ def Variance(nums):
             sum += quantity(number,sampleMean) # adding up all the quantities
       return sum/(n-1) # returns the sum / num of values - 1
 
+def Range(nums):
+      return (max(nums)-min(nums))
+
 
 def pupolation_Variance(nums):
       sum = 0
@@ -38,11 +41,6 @@ def Standard_Dev(nums):
 
 def population_Standard_Dev(nums):
       return pupolation_Variance(nums)**0.5
-
-
-#def range(nums):
-#      return (max(nums)-min(nums))
-
 
 def stem_leaf_plot(nums):
       branches = []
@@ -124,42 +122,6 @@ def stem_leaf_plot(nums):
       #      print(strB)
 
       return stringBranches
-
-
-                  
-
-
-
-class branch:
-      leafs = ""
-   
-      
-      def __init__(self, stem, leaf):
-            self.stem = stem
-           # print(self.stem)
-           
-            self.leafs += str(leaf) + " "
-           # print(self.leafs)
-
-      def append(self, leaf):
-            self.leafs += str(leaf) + " "
-      
-      def getStem(self):
-            return self.stem
-      
-      def getLeafs(self):
-            return self.leafs
-
-      def toString(self):
-            myStr = "" + str(self.stem) + "  :  " + self.leafs
-            return myStr
-      
-      #def sort(self):
-            self.leafs.sort()
-
-  
-
-
 
 
 
